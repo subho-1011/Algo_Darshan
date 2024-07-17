@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { useArrayActions } from "@/contexts/Sorting";
+import { useArrayActions } from "@/contexts";
 
 const RandomizeButton = () => {
   const onClickRandomize = () => {};

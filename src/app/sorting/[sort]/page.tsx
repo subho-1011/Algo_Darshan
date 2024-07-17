@@ -1,7 +1,7 @@
 "use client";
 
 import ArrayCanvas from "@/components/ArrayCanvas";
-import { useArrayState } from "@/contexts/Sorting";
+import { useArrayState } from "@/contexts";
 
 const SortingOptions = () => {
   const { array } = useArrayState();

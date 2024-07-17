@@ -1,8 +1,5 @@
 import React from "react";
-import { ArrayProvider } from "./ArrayContext";
-import { SortingProvider } from "./SortingContext";
-import { SortingStatusProvider } from "./SortingStatusContext";
-import { SpeedProvider } from "./SpeedContext";
+import * as providers from "@/contexts";
 
 const SortingContextProvider = ({
   children,
@@ -10,13 +7,15 @@ const SortingContextProvider = ({
   children: React.ReactNode;
 }) => {
   return (
-    <ArrayProvider>
-      <SpeedProvider>
-        <SortingProvider>
-          <SortingStatusProvider>{children}</SortingStatusProvider>
-        </SortingProvider>
-      </SpeedProvider>
-    </ArrayProvider>
+    <providers.ArrayProvider>
+      <providers.SpeedProvider>
+        <providers.SortingProvider>
+          <providers.SortingStatusProvider>
+            {children}
+          </providers.SortingStatusProvider>
+        </providers.SortingProvider>
+      </providers.SpeedProvider>
+    </providers.ArrayProvider>
   );
 };
 

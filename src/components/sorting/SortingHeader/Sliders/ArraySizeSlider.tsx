@@ -1,7 +1,7 @@
 "use client";
 
 import { Slider } from "@/components/ui/slider";
-import { useArrayActions, useArrayState } from "@/contexts/Sorting";
+import { useArrayActions, useArrayState } from "@/contexts";
 
 const ArraySizeSlider = () => {
   const { arrayLength } = useArrayState();

@@ -1,7 +1,6 @@
 "use client";
 
-import { useArrayActions } from "./ArrayContext";
-import { useSortingActions } from "./SortingContext";
+import { useArrayActions, useSortingActions } from "@/contexts";
 import { createContext, useContext, useState } from "react";
 
 type Status = "running" | "finished";

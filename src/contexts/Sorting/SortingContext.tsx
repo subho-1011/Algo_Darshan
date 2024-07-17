@@ -4,7 +4,7 @@ import React, { useState, useEffect, useContext, createContext } from "react";
 import AlgorithmNames from "@/constants";
 import { useRouter } from "next/navigation";
 import { delay } from "@/lib/utils";
-import { useSpeedState, useArrayActions, useArrayState } from "../Sorting";
+import { useSpeedState, useArrayActions, useArrayState } from "@/contexts";
 
 const Sortings = AlgorithmNames.Sorting;
 
