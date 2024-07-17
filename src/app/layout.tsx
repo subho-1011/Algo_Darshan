@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Header from "@/components/navigation/header";
+import * as providers from "@/contexts";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +18,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <providers.AlgorithmProvider>
+          <Header />
+          <main className="flex h-[calc(100vh-68px)] w-full bg-gradient-to-t to-purple-200 from-emerald-50 flex-col items-center justify-between">
+            {children}
+          </main>
+        </providers.AlgorithmProvider>
+      </body>
     </html>
   );
 }
