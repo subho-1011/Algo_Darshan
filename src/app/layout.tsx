@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/navigation/header";
 import * as providers from "@/contexts";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,6 +25,7 @@ export default function RootLayout({
           <main className="flex h-[calc(100vh-68px)] w-full bg-gradient-to-t to-purple-200 from-emerald-50 flex-col items-center justify-between">
             {children}
           </main>
+          <Toaster />
         </providers.AlgorithmProvider>
       </body>
     </html>
