@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import AlgorithmNames from "@/constants";
 import { useRouter } from "next/navigation";
+import { slugify } from "@/utils";
 
 type AlgorithmNameType = keyof typeof AlgorithmNames;
 
@@ -30,7 +31,7 @@ const AlgorithmProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   useEffect(() => {
-    router.push(`/${algorithmName.toLowerCase()}`);
+    // router.push(`/${slugify(algorithmName)}`); TODO: remove this later
   }, [algorithmName, router]);
 
   return (
