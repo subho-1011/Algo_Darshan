@@ -9,7 +9,8 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
+        default:
+          "bg-purple-600 text-primary-foreground hover:bg-purple-600/90 active:scale-[1.05] hover:scale-[1.07] ease-in-out",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:
@@ -18,6 +19,10 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+
+        success:
+          "bg-emerald-600 hover:bg-emerald-600/90 text-secondary border-emerald-800 active:scale-[1.05] hover:scale-[1.07] ease-in-out",
+        warning: "bg-amber-500 text-secondary border-amber-800",
       },
       size: {
         default: "h-10 px-4 py-2",
@@ -31,7 +36,7 @@ const buttonVariants = cva(
       size: "default",
     },
   }
-)
+);
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
