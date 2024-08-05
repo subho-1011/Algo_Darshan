@@ -3,6 +3,7 @@ import ValueMapper from "./ValueMapper";
 import shuffleArray from "./shuffleArray";
 import customHeightMapper from "./customHeightMapper";
 import generateArrayOfLength from "./generateArrayOfLength";
+import generateEmptyBoard from "./generateEmptyBoard";
 
 export {
   slugify,
@@ -10,4 +11,5 @@ export {
   shuffleArray,
   customHeightMapper,
   generateArrayOfLength,
+  generateEmptyBoard,
 };
