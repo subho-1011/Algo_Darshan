@@ -4,6 +4,7 @@ import shuffleArray from "./shuffleArray";
 import customHeightMapper from "./customHeightMapper";
 import generateArrayOfLength from "./generateArrayOfLength";
 import generateEmptyBoard from "./generateEmptyBoard";
+import randomColor from "./randomColor";
 
 export {
   slugify,
@@ -12,4 +13,5 @@ export {
   customHeightMapper,
   generateArrayOfLength,
   generateEmptyBoard,
+  randomColor,
 };
