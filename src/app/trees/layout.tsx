@@ -12,9 +12,13 @@ export const metadata: Metadata = {
 
 export default function TreePageLayout() {
   return (
-    <provider.TreesProvider>
-      <TreeNavbar />
-      <TreesPage />
-    </provider.TreesProvider>
+    <provider.NoOfElementsProvider>
+      <provider.SpeedProvider>
+        <provider.TreesProvider>
+          <TreeNavbar />
+          <TreesPage />
+        </provider.TreesProvider>
+      </provider.SpeedProvider>
+    </provider.NoOfElementsProvider>
   );
 }

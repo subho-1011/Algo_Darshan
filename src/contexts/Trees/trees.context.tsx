@@ -3,13 +3,13 @@
 import { TTreeNode } from "@/types";
 import React, { useCallback, useEffect, useState } from "react";
 import { generateRandomTree } from "@/utils";
+import { useSpeedState } from "@/contexts/Speed.context";
+import { useNoOfElementsState } from "../NoOfElements.context";
 
-type TTreeTraversal = "preOrder" | "postOrder" | "inOrder";
+type TTreeTraversal = "preOrder" | "postOrder" | "inOrder" | "levelOrder";
 
 type state = {
-  noOfNodes: number;
   traversal: string;
-  speed: number;
   randomness: number;
   isSingleColor: boolean;
   treeRoot: TTreeNode | null;
@@ -17,9 +17,7 @@ type state = {
 };
 
 type actions = {
-  onTreeSizeChange: (arg0: number) => void;
   changeTraversal: (arg0: string) => void;
-  changeSpeed: (arg0: number) => void;
   changeRandomness: (arg0: number) => void;
   changeColor: (arg0: boolean) => void;
   resetTreeColors: () => void;
@@ -30,26 +28,19 @@ type actions = {
 const TreesStateContext = React.createContext<state | undefined>(undefined);
 const TreesActionsContext = React.createContext<actions | undefined>(undefined);
 
-const INITIAL_NO_OF_TREE_NODES = 13;
-
 const TreesProvider = ({ children }: { children: React.ReactNode }) => {
-  const [speed, setSpeed] = useState<number>(50);
   const [randomness, setRandomness] = useState<number>(25);
   const [isPending, setIsPending] = useState(false);
   const [treeRoot, setTreeRoot] = useState<TTreeNode | null>(null);
   const [isSingleColor, setIsSingleColor] = useState<boolean>(false);
   const [traversal, setTraversal] = useState<TTreeTraversal>("preOrder");
-  const [noOfNodes, setNoOfNodes] = useState<number>(INITIAL_NO_OF_TREE_NODES);
 
-  //   no of nodes changed by slider
-  const onTreeSizeChange = (n: number) => setNoOfNodes(n);
+  const { noOfElements } = useNoOfElementsState();
+  const { speed } = useSpeedState();
 
   // select traversal type
   const changeTraversal = (traversal: string) =>
     setTraversal(traversal as TTreeTraversal);
-
-  // change traversal speed
-  const changeSpeed = (n: number) => setSpeed(n);
 
   // change randomness trees
   const changeRandomness = (n: number) => setRandomness(n);
@@ -73,9 +64,9 @@ const TreesProvider = ({ children }: { children: React.ReactNode }) => {
 
   // new tree generator
   const generateNewTree = useCallback(() => {
-    const newTreeRoot = generateRandomTree(noOfNodes, randomness);
+    const newTreeRoot = generateRandomTree(noOfElements, randomness);
     setTreeRoot(newTreeRoot);
-  }, [noOfNodes, randomness]);
+  }, [noOfElements, randomness]);
 
   // pre-order traversal
   const preOrderTraversal = (node: TTreeNode | null) => {
@@ -174,6 +165,34 @@ const TreesProvider = ({ children }: { children: React.ReactNode }) => {
 
   const onInOrderTraversal = () => inOrderTraversal(treeRoot);
 
+  // level order traversal
+  const levelOrderTraversal = (node: TTreeNode | null) => {
+    if (!node) return;
+
+    resetTreeColors(); // Reset any previous coloring
+    setIsPending(true);
+    const queue: TTreeNode[] = [node]; // Start with the root node
+    const interval = 1000;
+
+    const intervalId = setInterval(() => {
+      if (queue.length === 0) {
+        clearInterval(intervalId);
+        setIsPending(false);
+        return;
+      }
+
+      const currNode = queue.shift()!; // Dequeue the current node
+      currNode.variant = "current"; // Mark as currently visited
+      setTreeRoot({ ...treeRoot! }); // Trigger re-render
+
+      // Enqueue the left and right children if they exist
+      if (currNode.left) queue.push(currNode.left);
+      if (currNode.right) queue.push(currNode.right);
+    }, interval);
+  };
+
+  const onLevelOrderTraversal = () => levelOrderTraversal(treeRoot);
+
   const startTraversal = () => {
     switch (traversal) {
       case "preOrder":
@@ -185,25 +204,23 @@ const TreesProvider = ({ children }: { children: React.ReactNode }) => {
       case "inOrder":
         onInOrderTraversal();
         break;
+      case "levelOrder":
+        onLevelOrderTraversal();
+        break;
       default:
         console.error(`Invalid traversal type: ${traversal}`);
         break;
     }
   };
 
-  // initialize no of nodes and array
-  useEffect(() => {
-    setNoOfNodes(INITIAL_NO_OF_TREE_NODES);
-  }, []);
+  // after completion of traversal reset colors
 
   useEffect(() => {
     generateNewTree();
   }, [generateNewTree]);
 
   const state: state = {
-    noOfNodes,
     traversal,
-    speed,
     randomness,
     isSingleColor,
     treeRoot,
@@ -211,9 +228,7 @@ const TreesProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const actions: actions = {
-    onTreeSizeChange,
     changeTraversal,
-    changeSpeed,
     changeRandomness,
     changeColor,
     resetTreeColors,
