@@ -1,9 +1,5 @@
-const SearchingPage = () => {
-  return (
-    <div className="">
-      <h1>Searching Algorithms</h1>
-    </div>
-  );
-};
+import SearchingPage from "@/app/searching/SearchingPage";
 
-export default SearchingPage;
+export default function SearchPage() {
+  return <SearchingPage />;
+}
