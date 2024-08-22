@@ -39,7 +39,7 @@ export default function Home() {
           {/* Linked List */}
           <AlgorithmThumbnailCard
             name="Linked List"
-            image="/linkedlistImage.png"
+            image="/linkedListImage.png"
             alt="Linked List Thumbnail"
             href="/linked-list"
           />
