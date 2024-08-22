@@ -1,16 +1,19 @@
 "use client";
 
 import React, { useState, useEffect, useContext, createContext } from "react";
-import AlgorithmNames from "@/constants";
-import { useRouter } from "next/navigation";
+import Sortings from "@/constants/sortings";
 import { delay } from "@/lib/utils";
-import { useSpeedState, useArrayActions, useArrayState } from "@/contexts";
-
-const Sortings = AlgorithmNames.Sorting;
+import {
+  useSpeedState,
+  useArrayActions,
+  useArrayState,
+  useNoOfElementsActions,
+} from "@/contexts";
 
 type SortingType = (typeof Sortings)[0];
 
 type State = {
+  array: number[];
   sortNames: SortingType[];
   selectedSort: SortingType;
   isRunning: boolean;
@@ -25,16 +28,17 @@ type Actions = {
 const SortingStateContext = createContext<State | undefined>(undefined);
 const SortingActionsContext = createContext<Actions | undefined>(undefined);
 
+const INTIAL_NO_OF_ELEMENTS = 50;
+
 const SortingProvider = ({ children }: { children: React.ReactNode }) => {
   const [selectedSort, setSelectedSort] = useState<SortingType>(Sortings[0]);
   const [isRunning, setIsRunning] = useState(false);
   const [colorIndexes, setColorIndexes] = useState<number[]>([]);
 
-  const router = useRouter();
-
   const { array } = useArrayState();
   const { speed } = useSpeedState();
-  const { setArray } = useArrayActions();
+  const { updateArray } = useArrayActions();
+  const { changeNoOfElements } = useNoOfElementsActions();
 
   const changeRunningState = (bool: boolean) => setIsRunning(bool);
   const changeColorIndexes = (indexes: number[]) => setColorIndexes(indexes);
@@ -43,7 +47,7 @@ const SortingProvider = ({ children }: { children: React.ReactNode }) => {
     setIsRunning(true);
     selectedSort.functionName(
       array,
-      setArray,
+      updateArray,
       speed,
       delay,
       changeRunningState,
@@ -62,12 +66,18 @@ const SortingProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   useEffect(() => {
-    router.push(`/sorting/${selectedSort.slug}`);
-  }, [router, selectedSort]);
+    changeNoOfElements(INTIAL_NO_OF_ELEMENTS);
+  }, []);
 
   return (
     <SortingStateContext.Provider
-      value={{ isRunning, sortNames: Sortings, selectedSort, colorIndexes }}
+      value={{
+        array,
+        isRunning,
+        sortNames: Sortings,
+        selectedSort,
+        colorIndexes,
+      }}
     >
       <SortingActionsContext.Provider value={{ selectSort, compileSort }}>
         {children}

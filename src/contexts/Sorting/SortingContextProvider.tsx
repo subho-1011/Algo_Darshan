@@ -7,15 +7,17 @@ const SortingContextProvider = ({
   children: React.ReactNode;
 }) => {
   return (
-    <providers.ArrayProvider>
-      <providers.SpeedProvider>
-        <providers.SortingProvider>
-          <providers.SortingStatusProvider>
-            {children}
-          </providers.SortingStatusProvider>
-        </providers.SortingProvider>
-      </providers.SpeedProvider>
-    </providers.ArrayProvider>
+    <providers.SpeedProvider>
+      <providers.NoOfElementsProvider>
+        <providers.ArrayProvider>
+          <providers.SortingProvider>
+            <providers.SortingStatusProvider>
+              {children}
+            </providers.SortingStatusProvider>
+          </providers.SortingProvider>
+        </providers.ArrayProvider>
+      </providers.NoOfElementsProvider>
+    </providers.SpeedProvider>
   );
 };
 
