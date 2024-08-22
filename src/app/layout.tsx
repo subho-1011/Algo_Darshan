@@ -23,13 +23,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <providers.AlgorithmProvider>
-          <Header />
-          <main className="flex min-h-[calc(100vh-68px)] min-w-full bg-gradient-to-t to-purple-200 from-emerald-50 flex-col items-center justify-between">
-            {children}
-          </main>
-          <Toaster />
-        </providers.AlgorithmProvider>
+        <Header />
+        <main className="flex min-h-[calc(100vh-68px)] min-w-full bg-gradient-to-t to-purple-200 from-emerald-50 flex-col items-center justify-between">
+          {children}
+        </main>
+        <Toaster />
       </body>
     </html>
   );

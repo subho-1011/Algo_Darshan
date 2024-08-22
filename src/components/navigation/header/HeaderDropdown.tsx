@@ -5,27 +5,19 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useAlgorithmState, useAlgorithmActions } from "@/contexts/Algorithm";
 
 const HeaderDropdown = () => {
-  const { algorithmName, algorithmNames } = useAlgorithmState();
-  const { selectAlgorithm } = useAlgorithmActions();
-
   return (
-    <Select
-      defaultValue={algorithmName}
-      value={algorithmName}
-      onValueChange={(value) => selectAlgorithm(value)}
-    >
+    <Select defaultValue="Sorting">
       <SelectTrigger className="text-secondary-foreground w-60">
         <SelectValue placeholder="Select an algorithm" />
       </SelectTrigger>
       <SelectContent>
-        {algorithmNames.map((algoName) => (
-          <SelectItem key={algoName} value={algoName}>
-            {algoName}
-          </SelectItem>
-        ))}
+        <SelectItem value="Sorting">Sorting</SelectItem>
+        <SelectItem value="searching">Searching</SelectItem>
+        <SelectItem value="backtracking">Backtracking</SelectItem>
+        <SelectItem value="linked-list">Linked list</SelectItem>
+        <SelectItem value="trees">Trees</SelectItem>
       </SelectContent>
     </Select>
   );
