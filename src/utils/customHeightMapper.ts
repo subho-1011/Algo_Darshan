@@ -1,13 +1,13 @@
-const customHeightMapper = (val: number, arrayLength: number) => {
-  return arrayLength < 50
-    ? val * 12
-    : arrayLength < 100
-    ? val * 6
-    : arrayLength < 150
-    ? val * 4
-    : arrayLength < 210
-    ? val * 3
-    : val * 2;
-};
+function CustomHeightMapper(value: number, array: number[]) {
+  const maxheight = window.innerHeight * 0.8;
 
-export default customHeightMapper;
+  const inputMin = Math.min(...array);
+  const inputMax = Math.max(...array);
+
+  const normalizedValue = (value - inputMin) / (inputMax - inputMin);
+  const mappedValue = 5 + normalizedValue * maxheight;
+
+  return mappedValue;
+}
+
+export default CustomHeightMapper;
