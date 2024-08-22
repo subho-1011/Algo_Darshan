@@ -14,14 +14,14 @@ const ArrayCanvas = ({ array }: { array: number[] }) => {
             <Bar
               key={index}
               arrayLength={arrayLength}
-              height={customHeightMapper(value, arrayLength)}
+              height={customHeightMapper(value, array)}
               color
             />
           ) : (
             <Bar
               key={index}
               arrayLength={arrayLength}
-              height={customHeightMapper(value, arrayLength)}
+              height={customHeightMapper(value, array)}
             />
           )}
         </>

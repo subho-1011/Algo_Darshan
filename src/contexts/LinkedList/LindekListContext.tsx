@@ -62,12 +62,14 @@ const LinkedListProvider = ({ children }: { children: React.ReactNode }) => {
 
   // insert at given index of list
   const insertNodeAtIndex = (value: number, position: number) => {
+    console.log(position > linkedListSize);
     if (position < 0 || position > linkedListSize) {
       toast({
         title: "Invalid Position",
         description: `Position should be between 1 and ${linkedListSize}`,
         variant: "destructive",
       });
+      return;
     }
 
     const newLinkedList = [...linkedList];
@@ -124,13 +126,12 @@ const LinkedListProvider = ({ children }: { children: React.ReactNode }) => {
 
   // Update value of given position in linked list
   const updateNode = (position: number, value: number) => {
-    if (position < 0 || position >= linkedListSize) {
+    if (position < 0 || position > linkedListSize) {
       toast({
         title: "Invalid Position",
         description: `Position should be between 1 and ${linkedListSize}`,
         variant: "destructive",
       });
-      console.log("Invalid position to update node");
       return;
     }
 

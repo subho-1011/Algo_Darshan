@@ -31,9 +31,9 @@ const TreeNavbar = () => {
           <NoOfElementsSlider
             text="No of Nodes"
             max={63}
-            isPending={isPending}
+            disabled={isPending}
           />
-          <SpeedSlider text="Traversal Speed " isPending={isPending} />
+          <SpeedSlider text="Traversal Speed " disabled={isPending} />
           <div className="flex flex-col items-center gap-3">
             <Label>Randomness of tree : {randomness}%</Label>
             <Slider

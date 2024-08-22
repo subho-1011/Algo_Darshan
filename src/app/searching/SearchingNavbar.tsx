@@ -18,8 +18,8 @@ const SearchingNavbar = () => {
     <div className="flex w-full items-center justify-center bg-primary/20">
       <div className="flex py-4 w-full max-w-7xl justify-between">
         <div className="flex gap-x-8">
-          <SpeedSlider isPending={isPending} />
-          <NoOfElementsSlider isPending={isPending} />
+          <SpeedSlider disabled={isPending} />
+          <NoOfElementsSlider disabled={isPending} />
         </div>
         <Select
           defaultValue="linear"

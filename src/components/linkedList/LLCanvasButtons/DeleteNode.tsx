@@ -8,13 +8,13 @@ type Inputs = {
 };
 
 const DeleteNodeButton = () => {
-  const { deleteNode } = useLinkedListActions();
+  const { deleteNodeAtPosition } = useLinkedListActions();
   const { register, handleSubmit, reset } = useForm();
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     const { pos } = data;
 
-    deleteNode(pos);
+    deleteNodeAtPosition(pos);
     reset();
   };
 

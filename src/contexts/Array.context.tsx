@@ -6,6 +6,7 @@ import { generateArray } from "@/lib/utils";
 
 type State = {
   array: number[];
+  arrayLength: number;
 };
 
 type Actions = {
@@ -36,7 +37,7 @@ const ArrayProvider = ({ children }: { children: React.ReactNode }) => {
   }, [refreshArray]);
 
   return (
-    <ArrayStateContext.Provider value={{ array }}>
+    <ArrayStateContext.Provider value={{ array, arrayLength: noOfElements }}>
       <ArrayActionsContext.Provider value={{ updateArray, refreshArray }}>
         {children}
       </ArrayActionsContext.Provider>

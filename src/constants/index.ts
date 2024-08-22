@@ -1,10 +1,4 @@
-import Sortings from "@/constants/sortings";
+export const MY_GITHUB_URL = "https://github.com/subho-1011";
 
-const AlgorithmNames = {
-  Sorting: Sortings,
-  Searching: [],
-  Backtracking: [],
-  "Linked List": [],
-};
-
-export default AlgorithmNames;
+export const PORTFOLIO_URL =
+  "https://subhodev-subhajit-pramaniks-projects.vercel.app/";

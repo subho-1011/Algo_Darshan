@@ -3,20 +3,16 @@
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
 import { useNoOfElementsActions, useNoOfElementsState } from "@/contexts";
+import { SliderProps } from "@radix-ui/react-slider";
+
+interface NoOfElementsSliderProps extends SliderProps {
+  text?: string;
+}
 
 const NoOfElementsSlider = ({
   text = "Size ",
-  min = 1,
-  max = 100,
-  step = 1,
-  isPending = false,
-}: {
-  text?: string;
-  min?: number;
-  max?: number;
-  step?: number;
-  isPending?: boolean;
-}) => {
+  ...sliderProps
+}: NoOfElementsSliderProps) => {
   const { noOfElements } = useNoOfElementsState();
   const { changeNoOfElements } = useNoOfElementsActions();
 
@@ -27,13 +23,11 @@ const NoOfElementsSlider = ({
           {text} : {noOfElements}
         </Label>
         <Slider
+          defaultValue={[]}
           value={[noOfElements]}
-          min={min}
-          max={max}
-          step={step}
           onValueChange={([value]) => changeNoOfElements(value)}
           className="w-48"
-          disabled={isPending}
+          {...sliderProps}
         />
       </div>
     </div>

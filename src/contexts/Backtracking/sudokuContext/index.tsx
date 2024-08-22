@@ -1,6 +1,7 @@
 "use client";
 
 import { solveSudokuSteps } from "@/algorithms/backtracking/sudokuSolve";
+import { getNewSudoku } from "@/services/sudoku.services";
 import axios from "axios";
 import React, { createContext, useContext, useEffect, useState } from "react";
 
@@ -22,6 +23,7 @@ type SudokuActionsContext = {
 
 const getSudokuArray = async () => {
   const response = await axios.get("https://sudoku-api.vercel.app/api/dosuku");
+  console.log(response);
 
   const data = response.data;
   const res = data.newboard.grids[0].value;
@@ -48,19 +50,19 @@ const SudokuProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     genarateNewSudoku();
+    getNewSudoku();
   }, []);
 
   const genarateNewSudoku = async () => {
-    const res = (await getSudokuArray()) as number[][];
-
-    const initialArray: SudokuCell[][] = res.map((row) =>
-      row.map((value) => ({
-        value,
-        state: value === 0 ? "empty" : "initial",
-      }))
-    );
-
-    setArray(initialArray);
+    // const res = (await getSudokuArray()) as number[][];
+    // const initialArray: SudokuCell[][] = res.map((row) =>
+    //   row.map((value) => ({
+    //     value,
+    //     state: value === 0 ? "empty" : "initial",
+    //   }))
+    // );
+    // setArray(initialArray);
+    setArray([]);
   };
 
   useEffect(() => {
